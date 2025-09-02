@@ -10,12 +10,23 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class SalesStatsWidget extends StatsOverviewWidget
 {
+    protected static ?string $pollingInterval = '30s';
+    
     protected function getStats(): array
     {
-        $totalRevenue = Order::where('status', OrderStatus::PAID)
-            ->sum('total_cents') / 100;
+        $totalRevenue = Order::whereIn('status', [
+                OrderStatus::PAID, 
+                OrderStatus::PREPARING, 
+                OrderStatus::SHIPPED, 
+                OrderStatus::DELIVERED
+            ])->sum('total_cents') / 100;
             
-        $totalOrders = Order::where('status', OrderStatus::PAID)->count();
+        $totalOrders = Order::whereIn('status', [
+                OrderStatus::PAID, 
+                OrderStatus::PREPARING, 
+                OrderStatus::SHIPPED, 
+                OrderStatus::DELIVERED
+            ])->count();
         
         $pendingOrders = Order::where('status', OrderStatus::PENDING)->count();
         

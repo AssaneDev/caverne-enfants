@@ -16,7 +16,7 @@ class Artist extends Model implements HasMedia
     protected $fillable = [
         'name',
         'slug',
-        'bio',
+        'biography',
         'links',
     ];
 
