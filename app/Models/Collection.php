@@ -17,6 +17,8 @@ class Collection extends Model implements HasMedia
         'name',
         'slug',
         'description',
+        'history',
+        'banner_image',
         'cover_media_id',
         'featured',
         'is_featured',

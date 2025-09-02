@@ -19,6 +19,7 @@ class Artwork extends Model implements HasMedia
         'sku',
         'title',
         'slug',
+        'description',
         'artist_id',
         'collection_id',
         'year',
@@ -86,5 +87,10 @@ class Artwork extends Model implements HasMedia
     public function getPriceAttribute(): float
     {
         return $this->price_cents / 100;
+    }
+
+    public function setPriceAttribute($value): void
+    {
+        $this->attributes['price_cents'] = (float) $value * 100;
     }
 }

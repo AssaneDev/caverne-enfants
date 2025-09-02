@@ -46,6 +46,15 @@
                     </div>
                 </div>
                 
+                @if($artwork->description)
+                    <div class="border-t border-stone-200 pt-6">
+                        <h3 class="text-lg font-semibold text-stone-900 mb-3">Description</h3>
+                        <div class="text-stone-700 leading-relaxed">
+                            {!! nl2br(e($artwork->description)) !!}
+                        </div>
+                    </div>
+                @endif
+                
                 <div class="border-t border-stone-200 pt-6">
                     <dl class="space-y-3">
                         @if($artwork->getTranslation('medium', app()->getLocale()))
