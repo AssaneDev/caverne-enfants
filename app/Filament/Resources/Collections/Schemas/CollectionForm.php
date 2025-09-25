@@ -7,6 +7,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 
@@ -42,7 +43,9 @@ class CollectionForm
                     ->disk('public')
                     ->directory('collections/banners')
                     ->maxSize(5120)
-                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp']),
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->visibility('public')
+                    ->imagePreviewHeight('200'),
                 Toggle::make('is_featured')
                     ->label('En vedette')
                     ->default(false),
@@ -58,6 +61,29 @@ class CollectionForm
                         'h3',
                         'link',
                     ])
+                    ->columnSpanFull(),
+
+                Textarea::make('atmosphere_description')
+                    ->label('Description de l\'ambiance de création')
+                    ->placeholder('Décrivez l\'ambiance et le contexte de création des œuvres de cette collection...')
+                    ->rows(3)
+                    ->columnSpanFull(),
+
+                SpatieMediaLibraryFileUpload::make('atmosphere_images')
+                    ->label('Images d\'ambiance de création')
+                    ->collection('atmosphere_images')
+                    ->multiple()
+                    ->reorderable()
+                    ->image()
+                    ->imagePreviewHeight('150')
+                    ->panelLayout('grid')
+                    ->maxFiles(10)
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->disk('public')
+                    ->directory('collections/atmosphere')
+                    ->visibility('public')
+                    ->hint('Maximum 10 images. Glissez-déposez plusieurs images à la fois. Formats acceptés : JPEG, PNG, WebP')
+                    ->helperText('Vous pouvez sélectionner et uploader plusieurs images simultanément.')
                     ->columnSpanFull(),
             ]);
     }

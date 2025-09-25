@@ -52,7 +52,7 @@
                             <h3 class="font-semibold text-stone-900">{{ $item->title_snapshot }}</h3>
                             <p class="text-stone-600">par {{ $item->artwork->artist->name }}</p>
                             @if($item->artwork->collection)
-                                <p class="text-sm text-stone-500">{{ $item->artwork->collection->getTranslation('name', app()->getLocale()) }}</p>
+                                <p class="text-sm text-stone-500">{{ $item->artwork->collection->name }}</p>
                             @endif
                             <p class="text-sm text-stone-500">Réf: {{ $item->artwork->sku }}</p>
                         </div>

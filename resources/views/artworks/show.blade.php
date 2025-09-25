@@ -1,5 +1,5 @@
 <x-layouts.app 
-    :metaTitle="($artwork->meta_title ?: $artwork->getTranslation('title', app()->getLocale()) . ' - Caverne des Enfants')"
+    :metaTitle="($artwork->meta_title ?: $artwork->title . ' - Caverne des Enfants')"
     :metaDescription="$artwork->meta_description">
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -7,7 +7,7 @@
             <div class="space-y-4">
                 @if($artwork->image_path)
                     <img src="{{ asset('storage/' . $artwork->image_path) }}" 
-                         alt="{{ $artwork->getTranslation('title', app()->getLocale()) }}"
+                         alt="{{ $artwork->title }}"
                          class="w-full aspect-square object-cover bg-stone-100 rounded-lg">
                 @else
                     <div class="aspect-square bg-stone-100 rounded-lg flex items-center justify-center text-stone-400">
@@ -26,7 +26,7 @@
                     </span>
                     
                     <h1 class="text-3xl font-bold text-stone-900 mb-4">
-                        {{ $artwork->getTranslation('title', app()->getLocale()) }}
+                        {{ $artwork->title }}
                     </h1>
                     
                     <div class="flex items-center space-x-4 text-stone-600 mb-6">
@@ -41,7 +41,7 @@
                         
                         @if($artwork->collection)
                             <span>•</span>
-                            <span>{{ $artwork->collection->getTranslation('name', app()->getLocale()) }}</span>
+                            <span>{{ $artwork->collection->name }}</span>
                         @endif
                     </div>
                 </div>
@@ -57,10 +57,10 @@
                 
                 <div class="border-t border-stone-200 pt-6">
                     <dl class="space-y-3">
-                        @if($artwork->getTranslation('medium', app()->getLocale()))
+                        @if($artwork->medium)
                             <div class="flex">
                                 <dt class="w-24 text-stone-500">Technique</dt>
-                                <dd class="text-stone-900">{{ $artwork->getTranslation('medium', app()->getLocale()) }}</dd>
+                                <dd class="text-stone-900">{{ $artwork->medium }}</dd>
                             </div>
                         @endif
                         
@@ -125,7 +125,7 @@
                         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                             @if($related->image_path)
                                 <img src="{{ asset('storage/' . $related->image_path) }}" 
-                                     alt="{{ $related->getTranslation('title', app()->getLocale()) }}"
+                                     alt="{{ $related->title }}"
                                      class="w-full aspect-square object-cover bg-stone-100">
                             @else
                                 <div class="aspect-square bg-stone-100 flex items-center justify-center text-stone-400">
@@ -137,7 +137,7 @@
                             
                             <div class="p-4">
                                 <h3 class="font-semibold text-stone-900 mb-2">
-                                    {{ $related->getTranslation('title', app()->getLocale()) }}
+                                    {{ $related->title }}
                                 </h3>
                                 
                                 <div class="flex justify-between items-center">

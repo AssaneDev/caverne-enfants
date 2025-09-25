@@ -164,14 +164,14 @@
                             <div class="w-16 h-16 bg-stone-100 rounded-lg overflow-hidden">
                                 @if($item->artwork->image_path)
                                     <img src="{{ asset('storage/' . $item->artwork->image_path) }}" 
-                                         alt="{{ $item->artwork->getTranslation('title', app()->getLocale()) }}"
+                                         alt="{{ $item->artwork->title }}"
                                          class="w-full h-full object-cover">
                                 @endif
                             </div>
                             
                             <div class="flex-1">
                                 <h3 class="font-semibold text-stone-900">
-                                    {{ $item->artwork->getTranslation('title', app()->getLocale()) }}
+                                    {{ $item->artwork->title }}
                                 </h3>
                                 <p class="text-sm text-stone-600">par {{ $item->artwork->artist->name }}</p>
                             </div>

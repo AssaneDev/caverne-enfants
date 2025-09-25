@@ -42,7 +42,7 @@ class OrderService
             foreach ($cart->items as $item) {
                 $order->items()->create([
                     'artwork_id' => $item->artwork_id,
-                    'title_snapshot' => $item->artwork->getTranslation('title', 'fr'),
+                    'title_snapshot' => $item->artwork->title,
                     'price_cents' => $item->artwork->price_cents,
                     'qty' => $item->qty,
                 ]);

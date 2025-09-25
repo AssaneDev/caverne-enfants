@@ -8,7 +8,7 @@
                     <div class="h-64 bg-stone-200 relative overflow-hidden">
                         @if($collection->artworks->first() && $collection->artworks->first()->image_path)
                             <img src="{{ asset('storage/' . $collection->artworks->first()->image_path) }}" 
-                                 alt="{{ $collection->getTranslation('name', app()->getLocale()) }}"
+                                 alt="{{ $collection->name }}"
                                  class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full flex items-center justify-center text-stone-400">
@@ -21,12 +21,12 @@
                     
                     <div class="p-6">
                         <h2 class="text-2xl font-semibold text-stone-900 mb-3">
-                            {{ $collection->getTranslation('name', app()->getLocale()) }}
+                            {{ $collection->name }}
                         </h2>
                         
-                        @if($collection->getTranslation('description', app()->getLocale()))
+                        @if($collection->description)
                             <p class="text-stone-600 mb-4">
-                                {{ $collection->getTranslation('description', app()->getLocale()) }}
+                                {{ $collection->description }}
                             </p>
                         @endif
                         
@@ -48,7 +48,7 @@
                                         <a href="{{ route('artworks.show', $artwork) }}" class="block w-full h-full hover:opacity-75 transition-opacity">
                                             @if($artwork->image_path)
                                                 <img src="{{ asset('storage/' . $artwork->image_path) }}" 
-                                                     alt="{{ $artwork->getTranslation('title', app()->getLocale()) }}"
+                                                     alt="{{ $artwork->title }}"
                                                      class="w-full h-full object-cover">
                                             @else
                                                 <div class="w-full h-full flex items-center justify-center text-stone-400">

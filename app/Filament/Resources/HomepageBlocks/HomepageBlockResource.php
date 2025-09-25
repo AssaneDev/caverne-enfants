@@ -20,6 +20,10 @@ class HomepageBlockResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $modelLabel = "Bloc de page d'accueil";
+
+    protected static ?string $pluralModelLabel = "Blocs de page d'accueil";
+
     public static function form(Schema $schema): Schema
     {
         return HomepageBlockForm::configure($schema);

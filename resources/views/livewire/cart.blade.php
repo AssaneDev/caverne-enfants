@@ -8,14 +8,14 @@
                     <div class="w-24 h-24 bg-stone-100 rounded-lg mr-6 flex-shrink-0">
                         @if($item->artwork->image_path)
                             <img src="{{ asset('storage/' . $item->artwork->image_path) }}" 
-                                 alt="{{ $item->artwork->getTranslation('title', app()->getLocale()) }}"
+                                 alt="{{ $item->artwork->title }}"
                                  class="w-full h-full object-cover rounded-lg">
                         @endif
                     </div>
                     
                     <div class="flex-1">
                         <h3 class="text-lg font-semibold text-stone-900">
-                            {{ $item->artwork->getTranslation('title', app()->getLocale()) }}
+                            {{ $item->artwork->title }}
                         </h3>
                         
                         @if($item->artwork->artist)
@@ -23,7 +23,7 @@
                         @endif
                         
                         @if($item->artwork->collection)
-                            <p class="text-sm text-stone-500">{{ $item->artwork->collection->getTranslation('name', app()->getLocale()) }}</p>
+                            <p class="text-sm text-stone-500">{{ $item->artwork->collection->name }}</p>
                         @endif
                     </div>
                     

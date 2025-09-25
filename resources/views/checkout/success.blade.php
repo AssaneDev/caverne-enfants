@@ -51,7 +51,7 @@
                                 <p class="text-stone-600 mb-2">par <span class="font-medium">{{ $item->artwork->artist->name }}</span></p>
                                 @if($item->artwork->collection)
                                     <p class="text-sm text-amber-600 font-medium">
-                                        Collection : {{ $item->artwork->collection->getTranslation('name', app()->getLocale()) }}
+                                        Collection : {{ $item->artwork->collection->name }}
                                     </p>
                                 @endif
                             </div>

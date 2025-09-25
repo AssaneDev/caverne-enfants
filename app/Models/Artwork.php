@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\Translatable\HasTranslations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Artwork extends Model implements HasMedia
 {
-    use HasUlids, HasTranslations, InteractsWithMedia;
+    use HasUlids, InteractsWithMedia;
 
     protected $fillable = [
         'sku',
@@ -50,7 +49,6 @@ class Artwork extends Model implements HasMedia
         'is_featured' => 'boolean',
     ];
 
-    public array $translatable = ['title', 'medium'];
 
     public function artist(): BelongsTo
     {

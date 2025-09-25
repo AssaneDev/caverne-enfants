@@ -37,19 +37,19 @@ class DatabaseSeeder extends Seeder
 
         $collections = [
             [
-                'name' => ['fr' => 'Les Carrés du Fleuve', 'en' => 'The River Squares'],
+                'name' => 'Les Carrés du Fleuve',
                 'slug' => 'carres-du-fleuve',
-                'description' => ['fr' => 'Une série unique explorant les formes géométriques dans la nature fluviale.', 'en' => 'A unique series exploring geometric forms in river nature.'],
+                'description' => 'Une série unique explorant les formes géométriques dans la nature fluviale.',
             ],
             [
-                'name' => ['fr' => 'La collection de l\'amitié', 'en' => 'The Friendship Collection'],
+                'name' => 'La collection de l\'amitié',
                 'slug' => 'collection-amitie',
-                'description' => ['fr' => 'Poésie visuelle de l\'école de la Petite Côte.', 'en' => 'Visual poetry from the Petite Côte school.'],
+                'description' => 'Poésie visuelle de l\'école de la Petite Côte.',
             ],
             [
-                'name' => ['fr' => 'La correction des baobab', 'en' => 'The Baobab Correction'],
+                'name' => 'La correction des baobab',
                 'slug' => 'correction-baobab',
-                'description' => ['fr' => 'Œuvres inspirées des grands baobabs de l\'école de la Petite Côte.', 'en' => 'Works inspired by the great baobabs of the Petite Côte school.'],
+                'description' => 'Œuvres inspirées des grands baobabs de l\'école de la Petite Côte.',
             ],
         ];
 
@@ -64,18 +64,12 @@ class DatabaseSeeder extends Seeder
             for ($i = 1; $i <= 3; $i++) {
                 Artwork::create([
                     'sku' => strtoupper($collectionData['slug']) . '-' . str_pad($i, 3, '0', STR_PAD_LEFT),
-                    'title' => [
-                        'fr' => $collectionData['name']['fr'] . ' #' . $i,
-                        'en' => $collectionData['name']['en'] . ' #' . $i,
-                    ],
+                    'title' => $collectionData['name'] . ' #' . $i,
                     'slug' => $collectionData['slug'] . '-' . $i,
                     'artist_id' => $index === 0 ? $donald->id : null,
                     'collection_id' => $collection->id,
                     'year' => 2023 + $index,
-                    'medium' => [
-                        'fr' => ['Huile sur toile', 'Acrylique sur papier', 'Technique mixte'][rand(0, 2)],
-                        'en' => ['Oil on canvas', 'Acrylic on paper', 'Mixed media'][rand(0, 2)],
-                    ],
+                    'medium' => ['Huile sur toile', 'Acrylique sur papier', 'Technique mixte'][rand(0, 2)],
                     'dimensions' => ['30x40 cm', '50x70 cm', '40x60 cm'][rand(0, 2)],
                     'price_cents' => [15000, 25000, 35000, 45000][rand(0, 3)],
                     'currency' => 'EUR',
@@ -83,7 +77,7 @@ class DatabaseSeeder extends Seeder
                     'featured' => $i === 1,
                     'on_home' => $index === 0 && $i === 1,
                     'weight_grams' => rand(200, 800),
-                    'meta_title' => $collectionData['name']['fr'] . ' #' . $i . ' - Caverne des Enfants',
+                    'meta_title' => $collectionData['name'] . ' #' . $i . ' - Caverne des Enfants',
                 ]);
             }
         }

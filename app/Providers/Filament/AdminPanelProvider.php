@@ -44,6 +44,9 @@ class AdminPanelProvider extends PanelProvider
                 \App\Filament\Widgets\SeoReminderWidget::class,
                 AccountWidget::class,
             ])
+            ->plugins([
+                //
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
