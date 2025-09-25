@@ -45,7 +45,7 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
             ])
             ->plugins([
-                //
+                \Filament\SpatieLaravelMediaLibraryPlugin\SpatieLaravelMediaLibraryPlugin::make(),
             ])
             ->middleware([
                 EncryptCookies::class,
