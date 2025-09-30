@@ -11,6 +11,43 @@ use Illuminate\Support\Str;
 
 class OrderService
 {
+    public function __construct(
+        private EmailService $emailService
+    ) {}
+
+    public function markAsPreparing(Order $order): bool
+    {
+        try {
+            $order->update(['status' => OrderStatus::PREPARING]);
+            $this->emailService->sendOrderPreparing($order);
+            return true;
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Erreur lors du passage en préparation', [
+                'order_id' => $order->id,
+                'error' => $e->getMessage()
+            ]);
+            return false;
+        }
+    }
+
+    public function markAsShipped(Order $order, string $trackingNumber = null, string $carrier = 'Colissimo'): bool
+    {
+        try {
+            $order->update([
+                'status' => OrderStatus::SHIPPED,
+                'tracking_number' => $trackingNumber,
+                'shipped_at' => now()
+            ]);
+            $this->emailService->sendOrderShipped($order, $trackingNumber, $carrier);
+            return true;
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Erreur lors du passage en expédition', [
+                'order_id' => $order->id,
+                'error' => $e->getMessage()
+            ]);
+            return false;
+        }
+    }
     public function createFromCart(Cart $cart, array $billingData, ?User $user = null): Order
     {
         return DB::transaction(function () use ($cart, $billingData, $user) {
@@ -20,7 +57,7 @@ class OrderService
                 return $item->artwork->price_cents * $item->qty;
             });
 
-            $shippingCents = 1500;
+            $shippingCents = 0; // Pas de frais de livraison
 
             $order = Order::create([
                 'order_number' => $this->generateOrderNumber(),
@@ -54,9 +91,9 @@ class OrderService
         });
     }
 
-    public function markAsPaid(Order $order): void
+    public function markAsPaid(Order $order): bool
     {
-        DB::transaction(function () use ($order) {
+        return DB::transaction(function () use ($order) {
             $order->update(['status' => OrderStatus::PAID]);
 
             foreach ($order->items as $item) {
@@ -64,6 +101,9 @@ class OrderService
                     app(ReserveArtworkService::class)->markAsSold($item->artwork);
                 }
             }
+
+            // Envoi de l'email de confirmation de paiement
+            return $this->emailService->sendPaymentConfirmation($order);
         });
     }
 

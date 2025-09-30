@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Orders\Schemas;
 use App\OrderStatus;
 use App\PaymentMethod;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -32,7 +33,16 @@ class OrderForm
                         OrderStatus::FAILED->value => 'Échec',
                         OrderStatus::REFUNDED->value => 'Remboursé',
                     ])
-                    ->required(),
+                    ->required()
+                    ->helperText('📧 Un email sera automatiquement envoyé au client lors du changement vers "Payé", "En préparation" ou "Expédié"'),
+
+                Placeholder::make('email_notice')
+                    ->label('📧 Notifications email automatiques')
+                    ->content('
+                        • **Payé** → Email de confirmation de paiement
+                        • **En préparation** → Email de préparation
+                        • **Expédié** → Email avec numéro de suivi
+                    '),
                     
                 Select::make('payment_method')
                     ->label('Méthode de paiement')

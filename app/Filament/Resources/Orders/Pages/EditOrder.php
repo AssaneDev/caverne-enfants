@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Orders\Pages;
 
 use App\Filament\Resources\Orders\OrderResource;
 use App\OrderStatus;
+use App\Services\OrderService;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
@@ -22,17 +23,23 @@ class EditOrder extends EditRecord
                 ->color('success')
                 ->visible(fn () => $this->record->status === OrderStatus::AWAITING_PAYMENT)
                 ->action(function () {
-                    $this->record->update([
-                        'status' => OrderStatus::PAID,
-                        'paid_at' => now(),
-                    ]);
-                    
-                    Notification::make()
-                        ->title('Paiement confirmé')
-                        ->body('La commande a été marquée comme payée.')
-                        ->success()
-                        ->send();
-                        
+                    $orderService = app(OrderService::class);
+                    $emailSent = $orderService->markAsPaid($this->record);
+
+                    if ($emailSent) {
+                        Notification::make()
+                            ->title('Paiement confirmé')
+                            ->body('✅ La commande a été marquée comme payée et l\'email de confirmation a été envoyé avec succès.')
+                            ->success()
+                            ->send();
+                    } else {
+                        Notification::make()
+                            ->title('Paiement confirmé')
+                            ->body('⚠️ La commande a été marquée comme payée mais l\'email n\'a pas pu être envoyé (vérifiez l\'adresse email).')
+                            ->warning()
+                            ->send();
+                    }
+
                     $this->refreshFormData([
                         'status',
                     ]);
@@ -44,16 +51,23 @@ class EditOrder extends EditRecord
                 ->color('warning')
                 ->visible(fn () => $this->record->status === OrderStatus::PAID)
                 ->action(function () {
-                    $this->record->update([
-                        'status' => OrderStatus::PREPARING,
-                    ]);
-                    
-                    Notification::make()
-                        ->title('Commande en préparation')
-                        ->body('La commande a été marquée en préparation.')
-                        ->success()
-                        ->send();
-                        
+                    $orderService = app(OrderService::class);
+                    $emailSent = $orderService->markAsPreparing($this->record);
+
+                    if ($emailSent) {
+                        Notification::make()
+                            ->title('Commande en préparation')
+                            ->body('✅ La commande a été marquée en préparation et l\'email a été envoyé avec succès.')
+                            ->success()
+                            ->send();
+                    } else {
+                        Notification::make()
+                            ->title('Commande en préparation')
+                            ->body('⚠️ La commande a été marquée en préparation mais l\'email n\'a pas pu être envoyé.')
+                            ->warning()
+                            ->send();
+                    }
+
                     $this->refreshFormData([
                         'status',
                     ]);
@@ -75,19 +89,27 @@ class EditOrder extends EditRecord
                         ->required(),
                 ])
                 ->action(function (array $data) {
-                    $this->record->update([
-                        'status' => OrderStatus::SHIPPED,
-                        'tracking_carrier' => $data['tracking_carrier'],
-                        'tracking_number' => $data['tracking_number'],
-                        'shipped_at' => now(),
-                    ]);
-                    
-                    Notification::make()
-                        ->title('Commande expédiée')
-                        ->body('La commande a été marquée comme expédiée.')
-                        ->success()
-                        ->send();
-                        
+                    $orderService = app(OrderService::class);
+                    $emailSent = $orderService->markAsShipped(
+                        $this->record,
+                        $data['tracking_number'],
+                        $data['tracking_carrier']
+                    );
+
+                    if ($emailSent) {
+                        Notification::make()
+                            ->title('Commande expédiée')
+                            ->body('✅ La commande a été marquée comme expédiée et l\'email avec le numéro de suivi a été envoyé avec succès.')
+                            ->success()
+                            ->send();
+                    } else {
+                        Notification::make()
+                            ->title('Commande expédiée')
+                            ->body('⚠️ La commande a été marquée comme expédiée mais l\'email n\'a pas pu être envoyé.')
+                            ->warning()
+                            ->send();
+                    }
+
                     $this->refreshFormData([
                         'status',
                         'tracking_carrier',

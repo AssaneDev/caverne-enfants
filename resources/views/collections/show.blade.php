@@ -165,7 +165,7 @@
                                              onclick="openAtmosphereModal({{ $loop->index }})">
                                             <!-- Image -->
                                             <div class="aspect-[4/3] relative">
-                                                <img src="{{ str_replace('http://localhost', '', $image->getUrl()) }}" 
+                                                <img src="{{ $image->getUrl() }}"
                                                      alt="Ambiance de création - {{ $collection->name }}"
                                                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                                                 
@@ -358,7 +358,7 @@
                             <div class="thumbnail-container cursor-pointer opacity-60 hover:opacity-100 transition-opacity rounded-lg overflow-hidden"
                                  onclick="showImage({{ $loop->index }})"
                                  data-index="{{ $loop->index }}">
-                                <img src="{{ str_replace('http://localhost', '', $image->getUrl()) }}" 
+                                <img src="{{ $image->getUrl() }}"
                                      alt="Miniature {{ $loop->iteration }}"
                                      class="w-16 h-16 object-cover">
                             </div>
@@ -373,9 +373,9 @@
             const atmosphereImages = [
                 @foreach($collection->getMedia('atmosphere_images') as $image)
                 {
-                    thumb: "{{ str_replace('http://localhost', '', $image->getUrl()) }}",
-                    large: "{{ str_replace('http://localhost', '', $image->getUrl()) }}",
-                    original: "{{ str_replace('http://localhost', '', $image->getUrl()) }}"
+                    thumb: "{{ $image->getUrl() }}",
+                    large: "{{ $image->getUrl() }}",
+                    original: "{{ $image->getUrl() }}"
                 }@if(!$loop->last),@endif
                 @endforeach
             ];

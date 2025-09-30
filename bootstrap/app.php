@@ -11,7 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Exclure les webhooks de la vérification CSRF
+        $middleware->validateCsrfTokens(except: [
+            'webhooks/*',
+            '/webhooks/*'
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

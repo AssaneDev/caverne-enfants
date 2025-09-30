@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\OrderObserver;
 use App\OrderStatus;
 use App\PaymentMethod;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -25,6 +26,12 @@ class Order extends Model
         'payment_method',
         'payment_reference',
         'payment_status',
+        'billing_name',
+        'billing_email',
+        'billing_address',
+        'billing_city',
+        'billing_postal_code',
+        'billing_country',
         'ship_first_name',
         'ship_last_name',
         'ship_line1',
@@ -51,6 +58,12 @@ class Order extends Model
         'delivered_at' => 'datetime',
         'paid_at' => 'datetime',
     ];
+
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::observe(OrderObserver::class);
+    }
 
     public function user(): BelongsTo
     {
