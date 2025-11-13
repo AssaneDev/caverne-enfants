@@ -110,6 +110,109 @@
         </section>
     @endif
 
+    {{-- Banners Section --}}
+    @if($banners->count() > 0)
+        <section class="py-8 bg-gradient-to-br from-stone-50 to-amber-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                @if($banners->count() == 1)
+                    {{-- Single Banner --}}
+                    @php $banner = $banners->first(); @endphp
+                    <div class="rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        @if($banner->link_url)
+                            <a href="{{ $banner->link_url }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset('storage/' . $banner->image_path) }}"
+                                     alt="{{ $banner->title }}"
+                                     class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500">
+                            </a>
+                        @else
+                            <img src="{{ asset('storage/' . $banner->image_path) }}"
+                                 alt="{{ $banner->title }}"
+                                 class="w-full h-auto object-cover">
+                        @endif
+                    </div>
+                @else
+                    {{-- Multiple Banners Carousel --}}
+                    <div x-data="{ currentBanner: 0 }" class="relative">
+                        <div class="rounded-xl overflow-hidden shadow-xl">
+                            @foreach($banners as $index => $banner)
+                                <div x-show="currentBanner === {{ $index }}"
+                                     x-transition:enter="transition ease-out duration-500"
+                                     x-transition:enter-start="opacity-0 transform translate-x-full"
+                                     x-transition:enter-end="opacity-100 transform translate-x-0"
+                                     x-transition:leave="transition ease-in duration-500"
+                                     x-transition:leave-start="opacity-100 transform translate-x-0"
+                                     x-transition:leave-end="opacity-0 transform -translate-x-full"
+                                     class="relative">
+                                    @if($banner->link_url)
+                                        <a href="{{ $banner->link_url }}" target="_blank" rel="noopener noreferrer">
+                                            <img src="{{ asset('storage/' . $banner->image_path) }}"
+                                                 alt="{{ $banner->title }}"
+                                                 class="w-full h-auto object-cover">
+                                        </a>
+                                    @else
+                                        <img src="{{ asset('storage/' . $banner->image_path) }}"
+                                             alt="{{ $banner->title }}"
+                                             class="w-full h-auto object-cover">
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+
+                        {{-- Navigation Arrows --}}
+                        @if($banners->count() > 1)
+                            <button @click="currentBanner = currentBanner === 0 ? {{ $banners->count() - 1 }} : currentBanner - 1"
+                                    class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all">
+                                <svg class="w-6 h-6 text-stone-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </button>
+
+                            <button @click="currentBanner = currentBanner === {{ $banners->count() - 1 }} ? 0 : currentBanner + 1"
+                                    class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all">
+                                <svg class="w-6 h-6 text-stone-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+
+                            {{-- Dots Indicators --}}
+                            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                                @foreach($banners as $index => $banner)
+                                    <button @click="currentBanner = {{ $index }}"
+                                            :class="currentBanner === {{ $index }} ? 'bg-white w-8' : 'bg-white/60 w-3'"
+                                            class="h-3 rounded-full transition-all duration-300"></button>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    {{-- Auto-rotation --}}
+                    @if($banners->count() > 1)
+                        <script>
+                            document.addEventListener('alpine:init', () => {
+                                setInterval(() => {
+                                    const currentBannerElement = document.querySelector('[x-data]');
+                                    if (currentBannerElement && currentBannerElement.__x) {
+                                        const data = currentBannerElement.__x.$data;
+                                        data.currentBanner = data.currentBanner === {{ $banners->count() - 1 }} ? 0 : data.currentBanner + 1;
+                                    }
+                                }, 5000); // Change every 5 seconds
+                            });
+                        </script>
+                    @endif
+                @endif
+            </div>
+        </section>
+    @endif
+
+    {{-- Quote Section 1 --}}
+    <section class="w-full py-16 px-6" style="background-color: #1bd1c2;">
+        <div class="max-w-4xl mx-auto">
+            <blockquote class="quote-cursive text-center text-white text-xl lg:text-2xl font-medium italic leading-relaxed">
+                "{{ \App\Helpers\QuoteHelper::getRandomQuote() }}"
+            </blockquote>
+        </div>
+    </section>
+
     @if($onHomeArtworks->count() > 0)
         <section class="py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -178,6 +281,15 @@
             </div>
         </section>
     @endif
+
+    {{-- Quote Section 2 --}}
+    <section class="w-full py-16 px-6" style="background-color: #1bd1c2;">
+        <div class="max-w-4xl mx-auto">
+            <blockquote class="quote-cursive text-center text-white text-xl lg:text-2xl font-medium italic leading-relaxed">
+                "{{ \App\Helpers\QuoteHelper::getRandomQuote() }}"
+            </blockquote>
+        </div>
+    </section>
 
     {{-- Section Featured Block (administrable) --}}
     @if($homepageBlocks->has('featured'))
@@ -269,6 +381,15 @@
         </section>
     @endif
 
+    {{-- Quote Section 3 --}}
+    <section class="w-full py-16 px-6" style="background-color: #1bd1c2;">
+        <div class="max-w-4xl mx-auto">
+            <blockquote class="quote-cursive text-center text-white text-xl lg:text-2xl font-medium italic leading-relaxed">
+                "{{ \App\Helpers\QuoteHelper::getRandomQuote() }}"
+            </blockquote>
+        </div>
+    </section>
+
     @if($featuredArtworks->count() > 0)
         <section class="py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -339,6 +460,15 @@
             </div>
         </section>
     @endif
+
+    {{-- Quote Section 4 --}}
+    <section class="w-full py-16 px-6" style="background-color: #1bd1c2;">
+        <div class="max-w-4xl mx-auto">
+            <blockquote class="quote-cursive text-center text-white text-xl lg:text-2xl font-medium italic leading-relaxed">
+                "{{ \App\Helpers\QuoteHelper::getRandomQuote() }}"
+            </blockquote>
+        </div>
+    </section>
 
     {{-- Section About Block (administrable) --}}
     @if($homepageBlocks->has('about'))

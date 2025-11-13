@@ -14,10 +14,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        
-        <!-- Couleurs dynamiques du thème -->
-        <link rel="stylesheet" href="{{ route('theme.colors') }}" id="dynamic-theme-colors">
-        
+
         <!-- Custom Animations -->
         <style>
             @keyframes fadeInUp {
@@ -64,7 +61,7 @@
         </style>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen">
             @include('layouts.navigation')
 
             <!-- Page Heading -->

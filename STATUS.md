@@ -46,6 +46,26 @@
 - **Interface admin** : Entièrement en français
 - **Frontend** : Interface française avec textes localisés
 
+### 📧 Système d'emails automatisés
+- **Configuration SMTP Gmail** : Service email opérationnel avec lacavernedesenfants@gmail.com
+- **Observer OrderObserver** : Détection automatique des changements de statut de commande
+- **EmailService** : Envoi d'emails pour confirmation paiement, préparation et expédition
+- **Templates HTML** : emails.payment-confirmation, emails.order-preparing, emails.order-shipped
+- **Email de bienvenue** : Template markdown envoyé automatiquement à l'inscription (WelcomeMail)
+- **Email newsletter** : Template markdown de confirmation d'abonnement (NewsletterSubscribed)
+- **Notifications admin** : Confirmations de succès/échec d'envoi dans l'interface Filament
+- **Gestion des emails clients** : Support billing_email et fallback sur user.email
+- **Logs complets** : Traçabilité de tous les envois d'emails dans laravel.log
+- **URLs de tracking** : Génération automatique des liens Colissimo et Chronopost
+
+### 🎨 Interface d'administration avancée
+- **Gestion des utilisateurs/clients** : Interface Filament pour consulter et gérer les comptes clients
+- **Gestion de la newsletter** : Interface complète avec filtres actifs/inactifs, recherche, export CSV
+- **Actions newsletter** : Toggle activer/désactiver, suppression, suppression en masse
+- **Actions de gestion des commandes** : Boutons rapides pour confirmer paiement, marquer en préparation/expédié
+- **Notifications en temps réel** : Feedback immédiat sur le succès/échec des emails automatiques
+- **Reset de mots de passe** : Fonction sécurisée de réinitialisation depuis l'admin
+
 ## ⚠️ Fonctionnalités non implémentées
 
 ### 📊 Dashboard client
@@ -57,11 +77,6 @@
 - **Statuts de livraison** : Expédié, en transit, livré
 - **Suivi des colis** : Numéros de tracking, notifications
 - **Gestion des transporteurs** : Configuration des méthodes de livraison
-
-### 📧 Notifications
-- **Emails transactionnels** : Confirmation commande, expédition, livraison
-- **Templates** : Mails HTML avec branding de la boutique
-- **Notifications admin** : Nouvelles commandes, stock bas
 
 ### 🧪 Tests
 - **Tests unitaires** : Modèles, services, logique métier
@@ -124,9 +139,9 @@
 
 ## 🔧 Prochaines étapes
 
-1. **Implémenter le dashboard client** avec historique des commandes
-2. **Ajouter la gestion des statuts de livraison** et tracking
-3. **Configurer les emails transactionnels** avec templates
+1. **Améliorer les emails existants** : Convertir les emails HTML en templates markdown élégants
+2. **Implémenter le dashboard client** avec historique des commandes
+3. **Ajouter la gestion des statuts de livraison** et tracking avancé
 4. **Écrire les tests complets** pour toute l'application
 5. **Optimiser pour la production** avec cache et monitoring
 
@@ -137,5 +152,31 @@
 - **Images** gérées via FileUpload Filament dans storage/app/public
 - **Réservations** avec expiration automatique pour éviter les blocages
 - **Webhooks** configurés pour confirmation de paiement asynchrone
+- **Observer pattern** pour déclenchement automatique des emails lors des changements d'état
+- **Gmail SMTP** configuré avec app password pour sécurité renforcée
+- **Fallback email** : billing_email en priorité, puis user.email si absent
 
-Le projet est **fonctionnel et prêt pour les tests utilisateur** avec les fonctionnalités e-commerce essentielles opérationnelles.
+## ✅ Dernières réalisations
+
+### Session Octobre 2025 - Newsletter et améliorations design
+- **Page d'inscription personnalisée** : Design moderne de `/register` cohérent avec `/login` (gradient amber, formulaire élégant)
+- **Email de bienvenue** : Email automatique en markdown envoyé aux nouveaux utilisateurs inscrits
+- **Système de newsletter complet** :
+  - Base de données : Table `newsletters` avec email, statut actif et date d'inscription
+  - Frontend : Section newsletter moderne avec gradient orange/amber dans le footer
+  - Backend : NewsletterController avec méthodes subscribe/unsubscribe
+  - Email de confirmation : Template markdown pour les nouveaux abonnés
+  - Interface admin Filament : Gestion complète des abonnés avec filtres, recherche et export CSV
+  - Actions admin : Activer/désactiver, supprimer, export en masse
+- **Design moderne** : Footer redesigné avec section newsletter séparée et footer sombre
+- **Migration exécutée** : Table newsletters créée et fonctionnelle
+
+### Configuration email automatisée (Septembre 2024)
+- **Observer OrderObserver** : Système automatique de détection des changements de statut
+- **EmailService complet** : Trois types d'emails (paiement, préparation, expédition)
+- **Interface admin renforcée** : Actions rapides avec notifications de succès/échec
+- **Gestion des clients** : Interface sécurisée pour consulter et gérer les utilisateurs
+- **Résolution de bugs** : Permissions, autoload et gestion des champs email
+- **Tests fonctionnels** : Validation complète du système avec envoi d'emails réels
+
+Le projet est **fonctionnel et prêt pour les tests utilisateur** avec un système complet d'e-commerce incluant les notifications automatiques par email et newsletter.

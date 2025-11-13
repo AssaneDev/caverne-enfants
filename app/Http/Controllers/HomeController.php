@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ArtworkStatus;
 use App\Models\Artwork;
+use App\Models\Banner;
 use App\Models\Collection;
 use App\Models\HomepageBlock;
 
@@ -16,7 +17,7 @@ class HomeController extends Controller
             ->orderBy('sort_order')
             ->get()
             ->keyBy('key');
-        
+
         $featuredArtworks = Artwork::whereIn('status', [ArtworkStatus::PUBLISHED, ArtworkStatus::SOLD])
             ->where('is_featured', true)
             ->with(['artist', 'collection'])
@@ -36,11 +37,17 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
+        // Récupérer les bannières actives
+        $banners = Banner::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
         return view('home', compact(
             'homepageBlocks',
             'featuredArtworks',
-            'onHomeArtworks', 
-            'featuredCollections'
+            'onHomeArtworks',
+            'featuredCollections',
+            'banners'
         ));
     }
 }

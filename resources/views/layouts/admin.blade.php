@@ -14,11 +14,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
-    <!-- Couleurs dynamiques du thème -->
-    <link rel="stylesheet" href="{{ route('theme.colors') }}" id="dynamic-theme-colors">
 </head>
-<body class="font-sans antialiased bg-gray-50">
+<body class="font-sans antialiased">
     <div class="min-h-screen">
         <!-- Navigation -->
         <nav class="bg-white shadow-sm border-b border-gray-200">
@@ -32,13 +29,9 @@
                         </div>
                         
                         <div class="ml-10 flex space-x-8">
-                            <a href="{{ url('/admin') }}" 
+                            <a href="{{ url('/admin') }}"
                                class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
                                 Dashboard
-                            </a>
-                            <a href="{{ route('admin.colors.index') }}" 
-                               class="text-blue-600 hover:text-blue-700 px-3 py-2 rounded-md text-sm font-medium">
-                                Couleurs
                             </a>
                         </div>
                     </div>
