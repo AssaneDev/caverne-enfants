@@ -547,10 +547,22 @@
                     <video
                         class="w-full h-auto"
                         controls
+                        controlsList="nodownload"
                         preload="metadata"
-                        poster="{{ Storage::disk('r2')->url('images-banniere/video-poster.jpg') }}">
+                        playsinline
+                        crossorigin="anonymous"
+                        poster="{{ Storage::disk('r2')->url('images-banniere/poster-video.png') }}"
+                        onloadstart="this.volume=0.7">
+                        <source src="{{ Storage::disk('r2')->url('images-banniere/video.mp4') }}" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2">
                         <source src="{{ Storage::disk('r2')->url('images-banniere/video.mp4') }}" type="video/mp4">
-                        Votre navigateur ne supporte pas la lecture de vidéos.
+                        <p class="text-white p-8 text-center">
+                            Votre navigateur ne supporte pas la lecture de vidéos HTML5.
+                            <a href="{{ Storage::disk('r2')->url('images-banniere/video.mp4') }}"
+                               class="text-amber-400 underline hover:text-amber-300"
+                               download>
+                                Télécharger la vidéo
+                            </a>
+                        </p>
                     </video>
                 </div>
 
@@ -559,5 +571,60 @@
                 <div class="absolute -top-6 -left-6 w-48 h-48 bg-orange-600 rounded-full opacity-10 blur-3xl"></div>
             </div>
         </div>
+
+        {{-- Script de gestion d'erreurs vidéo --}}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const video = document.querySelector('video');
+
+                if (video) {
+                    // Gestion des erreurs de chargement
+                    video.addEventListener('error', function(e) {
+                        console.error('Erreur de chargement vidéo:', e);
+
+                        // Afficher un message d'erreur convivial
+                        const errorDiv = document.createElement('div');
+                        errorDiv.className = 'absolute inset-0 flex items-center justify-center bg-stone-900/90 text-white p-8 text-center';
+                        errorDiv.innerHTML = `
+                            <div>
+                                <svg class="w-16 h-16 mx-auto mb-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                </svg>
+                                <h3 class="text-xl font-bold mb-2">Impossible de charger la vidéo</h3>
+                                <p class="mb-4">La vidéo ne peut pas être lue dans votre navigateur.</p>
+                                <a href="{{ Storage::disk('r2')->url('images-banniere/video.mp4') }}"
+                                   class="inline-block bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 transition-colors"
+                                   download>
+                                    Télécharger la vidéo
+                                </a>
+                            </div>
+                        `;
+                        video.parentElement.style.position = 'relative';
+                        video.parentElement.appendChild(errorDiv);
+                    }, true);
+
+                    // Forcer le rechargement si la vidéo ne se charge pas après 3 secondes
+                    setTimeout(function() {
+                        if (video.readyState === 0) {
+                            console.log('Rechargement de la vidéo...');
+                            video.load();
+                        }
+                    }, 3000);
+
+                    // Log pour le debugging
+                    video.addEventListener('loadstart', function() {
+                        console.log('Chargement de la vidéo démarré');
+                    });
+
+                    video.addEventListener('loadedmetadata', function() {
+                        console.log('Métadonnées vidéo chargées');
+                    });
+
+                    video.addEventListener('canplay', function() {
+                        console.log('La vidéo peut être lue');
+                    });
+                }
+            });
+        </script>
     </section>
 </x-layouts.app>

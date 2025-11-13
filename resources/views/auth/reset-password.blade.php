@@ -30,6 +30,12 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+        <!-- Cloudflare Turnstile -->
+        <div class="mt-4">
+            <div class="cf-turnstile" data-sitekey="{{ config('turnstile.site_key') }}"></div>
+            <x-input-error :messages="$errors->get('cf-turnstile-response')" class="mt-2" />
+        </div>
+
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
                 {{ __('Reset Password') }}

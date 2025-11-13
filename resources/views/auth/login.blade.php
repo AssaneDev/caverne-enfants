@@ -12,6 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body class="font-sans antialiased bg-gradient-to-br from-slate-50 via-amber-50 to-slate-100">
     <div class="min-h-screen flex items-center justify-center p-4">
@@ -88,6 +91,12 @@
                                 Mot de passe oublié ?
                             </a>
                         @endif
+                    </div>
+
+                    <!-- Cloudflare Turnstile -->
+                    <div>
+                        <div class="cf-turnstile" data-sitekey="{{ config('turnstile.site_key') }}"></div>
+                        <x-input-error :messages="$errors->get('cf-turnstile-response')" class="mt-2" />
                     </div>
 
                     <!-- Bouton de connexion -->

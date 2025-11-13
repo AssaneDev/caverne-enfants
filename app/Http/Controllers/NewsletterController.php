@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\NewsletterSubscribed;
 use App\Models\Newsletter;
+use App\Rules\TurnstileValid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -13,8 +14,10 @@ class NewsletterController extends Controller
     {
         $request->validate([
             'email' => ['required', 'email', 'max:255', 'unique:newsletters,email'],
+            'cf-turnstile-response' => ['required', new TurnstileValid()],
         ], [
             'email.unique' => 'Cet email est déjà inscrit à notre newsletter.',
+            'cf-turnstile-response.required' => 'Veuillez compléter la vérification de sécurité.',
         ]);
 
         $newsletter = Newsletter::create([

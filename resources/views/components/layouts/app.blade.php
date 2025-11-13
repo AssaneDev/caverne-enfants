@@ -15,6 +15,9 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body class="text-stone-900 antialiased">
     <nav class="bg-white shadow-sm border-b border-stone-200">
@@ -85,23 +88,37 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('newsletter.subscribe') }}" class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+                <form method="POST" action="{{ route('newsletter.subscribe') }}" class="max-w-xl mx-auto">
                     @csrf
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Votre adresse email"
-                        required
-                        class="flex-1 px-6 py-4 rounded-xl border-2 border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition-all"
-                    />
-                    <button
-                        type="submit"
-                        class="px-8 py-4 bg-white text-amber-600 font-bold rounded-xl hover:bg-amber-50 transition-all shadow-xl hover:shadow-2xl hover:scale-105 transform duration-200"
-                    >
-                        S'inscrire
-                    </button>
+                    <div class="flex flex-col sm:flex-row gap-3 mb-4">
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Votre adresse email"
+                            required
+                            class="flex-1 px-6 py-4 rounded-xl border-2 border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition-all"
+                        />
+                        <button
+                            type="submit"
+                            class="px-8 py-4 bg-white text-amber-600 font-bold rounded-xl hover:bg-amber-50 transition-all shadow-xl hover:shadow-2xl hover:scale-105 transform duration-200"
+                        >
+                            S'inscrire
+                        </button>
+                    </div>
+
+                    <!-- Cloudflare Turnstile Widget -->
+                    <div class="flex justify-center">
+                        <div class="cf-turnstile"
+                             data-sitekey="{{ config('turnstile.site_key') }}"
+                             data-theme="light"
+                             data-size="normal"></div>
+                    </div>
                 </form>
+
                 @error('email')
+                    <p class="mt-3 text-white/90 text-sm">{{ $message }}</p>
+                @enderror
+                @error('cf-turnstile-response')
                     <p class="mt-3 text-white/90 text-sm">{{ $message }}</p>
                 @enderror
 
