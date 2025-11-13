@@ -1,4 +1,15 @@
 <x-layouts.app metaTitle="Collections - Caverne des Enfants">
+    {{-- Banner Section - AFO Image from R2 --}}
+    <section class="w-full py-8 px-4 sm:px-6 lg:px-8 bg-stone-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="rounded-xl overflow-hidden shadow-lg">
+                <img src="{{ Storage::disk('r2')->url('images-banniere/afo.png') }}"
+                     alt="Bannière Caverne des Enfants"
+                     class="w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 class="text-4xl font-bold text-stone-900 mb-8 text-center">Collections</h1>
         

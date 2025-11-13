@@ -1,5 +1,17 @@
-<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1 class="text-3xl font-bold text-stone-900 mb-8">Mon panier</h1>
+<div>
+    {{-- Banner Section - AFO Image from R2 --}}
+    <section class="w-full py-8 px-4 sm:px-6 lg:px-8 bg-stone-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="rounded-xl overflow-hidden shadow-lg">
+                <img src="{{ Storage::disk('r2')->url('images-banniere/afo.png') }}"
+                     alt="Bannière Caverne des Enfants"
+                     class="w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-3xl font-bold text-stone-900 mb-8">Mon panier</h1>
     
     @if(count($cartItems) > 0)
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
@@ -65,10 +77,11 @@
             <h2 class="text-xl font-semibold text-stone-900 mb-2">Votre panier est vide</h2>
             <p class="text-stone-600 mb-6">Découvrez nos collections d'œuvres uniques</p>
             
-            <a href="{{ route('collections.index') }}" 
+            <a href="{{ route('collections.index') }}"
                class="inline-block bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 transition-colors">
                 Découvrir nos œuvres
             </a>
         </div>
     @endif
+    </div>
 </div>

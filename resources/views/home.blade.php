@@ -204,12 +204,14 @@
         </section>
     @endif
 
-    {{-- Quote Section 1 --}}
-    <section class="w-full py-16 px-6" style="background-color: #1bd1c2;">
-        <div class="max-w-4xl mx-auto">
-            <blockquote class="quote-cursive text-center text-white text-xl lg:text-2xl font-medium italic leading-relaxed">
-                "{{ \App\Helpers\QuoteHelper::getRandomQuote() }}"
-            </blockquote>
+    {{-- Banner Section - AFO Image from R2 --}}
+    <section class="w-full py-8 px-4 sm:px-6 lg:px-8 bg-stone-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="rounded-xl overflow-hidden shadow-lg">
+                <img src="{{ Storage::disk('r2')->url('images-banniere/afo.png') }}"
+                     alt="Bannière Caverne des Enfants"
+                     class="w-full h-auto object-cover">
+            </div>
         </div>
     </section>
 
