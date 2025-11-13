@@ -2,14 +2,20 @@
 
 ## Configuration dans le .env
 
-Le fichier `.env` contient déjà les identifiants PayPal :
+Ajoutez les variables suivantes dans votre fichier `.env` :
 
 ```env
-PAYPAL_CLIENT_ID=AcGEygQn7uUyoIw0q2e9HSqpU1dMUt6YpgGQH86u4ONsbtFZglTG2nGchENPwMC2FHJYN6VM8FdMwKOh
-PAYPAL_CLIENT_SECRET=EHH8pwRrpnEsr_JCSV9O4xuqLU1T0jB78Y_KyhdoFU6ykzfQawBZorpP2OCH-dKqV4-zQUqVe9lxZ7KX
+PAYPAL_CLIENT_ID=votre_client_id_paypal
+PAYPAL_CLIENT_SECRET=votre_client_secret_paypal
 PAYPAL_MODE=live
-PAYPAL_WEBHOOK_ID=8JW97898FS1444721
+PAYPAL_WEBHOOK_ID=votre_webhook_id
 ```
+
+**Comment obtenir ces valeurs :**
+1. Connectez-vous à https://developer.paypal.com/
+2. Allez dans **Apps & Credentials**
+3. Créez une application ou sélectionnez une existante
+4. Copiez le **Client ID** et le **Client Secret**
 
 ## Configuration du Webhook PayPal
 
@@ -27,8 +33,8 @@ PAYPAL_WEBHOOK_ID=8JW97898FS1444721
   - ✅ `PAYMENT.CAPTURE.REFUNDED` - Quand le paiement est remboursé
 
 ### 3. Récupérer le Webhook ID
-- Après création, notez le **Webhook ID** (déjà configuré : `8JW97898FS1444721`)
-- Vérifiez qu'il correspond bien à celui dans le `.env`
+- Après création, notez le **Webhook ID** fourni par PayPal
+- Ajoutez-le dans votre fichier `.env` comme `PAYPAL_WEBHOOK_ID`
 
 ## Flux de paiement PayPal
 
