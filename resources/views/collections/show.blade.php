@@ -330,23 +330,23 @@
                 </div>
                 
                 <!-- Image principale -->
-                <div class="flex-1 flex items-center justify-center relative">
-                    <button onclick="previousImage()" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 p-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all z-10">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                <div class="flex-1 flex items-center justify-center relative px-16 sm:px-20">
+                    <button onclick="previousImage()" class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 p-2 sm:p-3 bg-black bg-opacity-70 rounded-full hover:bg-opacity-90 transition-all z-20 shadow-xl">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
-                    
-                    <div class="w-full h-full flex items-center justify-center">
-                        <img id="modalImage" 
-                             src="" 
+
+                    <div class="w-full h-full flex items-center justify-center p-4">
+                        <img id="modalImage"
+                             src=""
                              alt="Ambiance de création"
-                             class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+                             class="max-w-[85%] max-h-[80vh] sm:max-w-[80%] sm:max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl">
                     </div>
-                    
-                    <button onclick="nextImage()" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 p-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all z-10">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+
+                    <button onclick="nextImage()" class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 p-2 sm:p-3 bg-black bg-opacity-70 rounded-full hover:bg-opacity-90 transition-all z-20 shadow-xl">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
                         </svg>
                     </button>
                 </div>
@@ -479,5 +479,105 @@
                 }
             });
         </script>
+    @endif
+
+    {{-- Section Vidéo (uniquement pour Les Carrés du Fleuve) --}}
+    @if($collection->slug === 'les-carres-du-fleuve')
+        <section class="relative bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900 py-20 overflow-hidden mt-16">
+            {{-- Motif de fond --}}
+            <div class="absolute inset-0 opacity-5">
+                <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.2) 2px, transparent 2px); background-size: 60px 60px;"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {{-- En-tête de section --}}
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-full mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
+                        L'Art en Mouvement
+                    </h2>
+                    <p class="text-xl text-amber-100 max-w-3xl mx-auto leading-relaxed">
+                        Découvrez les coulisses de la création des Carrés du Fleuve
+                    </p>
+                </div>
+
+                {{-- Conteneur vidéo --}}
+                <div class="relative max-w-5xl mx-auto">
+                    {{-- Effet de halo --}}
+                    <div class="absolute -inset-4 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 rounded-3xl blur-2xl opacity-20"></div>
+
+                    {{-- Vidéo --}}
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/10">
+                        <video
+                            class="w-full h-auto"
+                            controls
+                            preload="metadata"
+                            poster="{{ Storage::disk('r2')->url('images-banniere/video-poster.jpg') }}">
+                            <source src="{{ Storage::disk('r2')->url('images-banniere/video.mp4') }}" type="video/mp4">
+                            Votre navigateur ne supporte pas la lecture de vidéos.
+                        </video>
+                    </div>
+
+                    {{-- Décoration --}}
+                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-amber-600 rounded-full opacity-10 blur-3xl"></div>
+                    <div class="absolute -top-6 -left-6 w-48 h-48 bg-orange-600 rounded-full opacity-10 blur-3xl"></div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+    {{-- Section Vidéo YouTube (uniquement pour Les Carrés de la Petite Côte) --}}
+    @if($collection->slug === 'les-carres-de-la-petite-cote')
+        <section class="relative bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900 py-20 overflow-hidden mt-16">
+            {{-- Motif de fond --}}
+            <div class="absolute inset-0 opacity-5">
+                <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.2) 2px, transparent 2px); background-size: 60px 60px;"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {{-- En-tête de section --}}
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-full mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
+                        L'Art en Mouvement
+                    </h2>
+                    <p class="text-xl text-amber-100 max-w-3xl mx-auto leading-relaxed">
+                        Découvrez les coulisses de la création des Carrés de la Petite Côte
+                    </p>
+                </div>
+
+                {{-- Conteneur vidéo YouTube --}}
+                <div class="relative max-w-5xl mx-auto">
+                    {{-- Effet de halo --}}
+                    <div class="absolute -inset-4 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 rounded-3xl blur-2xl opacity-20"></div>
+
+                    {{-- Vidéo YouTube --}}
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/10" style="aspect-ratio: 16/9;">
+                        <iframe
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/gaYHLt9QxOA"
+                            title="Les Carrés de la Petite Côte - Vidéo"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    {{-- Décoration --}}
+                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-amber-600 rounded-full opacity-10 blur-3xl"></div>
+                    <div class="absolute -top-6 -left-6 w-48 h-48 bg-orange-600 rounded-full opacity-10 blur-3xl"></div>
+                </div>
+            </div>
+        </section>
     @endif
 </x-layouts.app>

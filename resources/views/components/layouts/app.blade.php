@@ -27,6 +27,10 @@
                 </div>
                 
                 <div class="flex items-center space-x-8">
+                    <a href="{{ route('home') }}" class="text-stone-600 hover:text-stone-900">
+                        Accueil
+                    </a>
+
                     <a href="{{ route('about') }}" class="text-stone-600 hover:text-stone-900">
                         À propos
                     </a>
@@ -59,7 +63,7 @@
     </main>
 
     {{-- Newsletter Section --}}
-    <section class="bg-gradient-to-br from-amber-600 via-orange-500 to-amber-700 py-16 mt-20">
+    <section class="bg-gradient-to-br from-stone-900 to-amber-900 py-16 mt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">

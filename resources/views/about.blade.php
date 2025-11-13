@@ -88,6 +88,19 @@
                 <p class="text-2xl text-stone-800 font-light leading-relaxed">
                     La Caverne des Enfants, c'est une <span class="font-semibold text-amber-600">aventure humaine et artistique</span> née de la rencontre entre la sensibilité des enfants et la passion des artistes.
                 </p>
+
+                {{-- Bouton de téléchargement de la plaquette --}}
+                <div class="pt-8">
+                    <a href="{{ Storage::disk('r2')->url('images-banniere/PLAQUETTE LA CAVERNE DES ENFANTS.pdf') }}"
+                       target="_blank"
+                       download
+                       class="inline-flex items-center gap-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span>Télécharger la plaquette</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>

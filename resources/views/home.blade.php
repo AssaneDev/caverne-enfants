@@ -512,4 +512,52 @@
             </div>
         </section>
     @endif
+
+    {{-- Section Vidéo --}}
+    <section class="relative bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900 py-20 overflow-hidden">
+        {{-- Motif de fond --}}
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.2) 2px, transparent 2px); background-size: 60px 60px;"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {{-- En-tête de section --}}
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-full mb-6">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
+                    L'Art en Mouvement
+                </h2>
+                <p class="text-xl text-amber-100 max-w-3xl mx-auto leading-relaxed">
+                    Plongez dans l'univers créatif de La Caverne des Enfants
+                </p>
+            </div>
+
+            {{-- Conteneur vidéo --}}
+            <div class="relative max-w-5xl mx-auto">
+                {{-- Effet de halo --}}
+                <div class="absolute -inset-4 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 rounded-3xl blur-2xl opacity-20"></div>
+
+                {{-- Vidéo --}}
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/10">
+                    <video
+                        class="w-full h-auto"
+                        controls
+                        preload="metadata"
+                        poster="{{ Storage::disk('r2')->url('images-banniere/video-poster.jpg') }}">
+                        <source src="{{ Storage::disk('r2')->url('images-banniere/video.mp4') }}" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+
+                {{-- Décoration --}}
+                <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-amber-600 rounded-full opacity-10 blur-3xl"></div>
+                <div class="absolute -top-6 -left-6 w-48 h-48 bg-orange-600 rounded-full opacity-10 blur-3xl"></div>
+            </div>
+        </div>
+    </section>
 </x-layouts.app>
