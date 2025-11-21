@@ -6,6 +6,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Connexion - {{ config('app.name') }}</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://storage.lacavernedesenfants.com/images-banniere/logo.jpg">
+    <link rel="apple-touch-icon" href="https://storage.lacavernedesenfants.com/images-banniere/logo.jpg">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -22,9 +26,9 @@
             <!-- Logo & Titre -->
             <div class="text-center mb-8">
                 <a href="{{ route('home') }}" class="inline-block mb-6">
-                    <div class="w-20 h-20 bg-gradient-to-br from-amber-600 to-amber-700 rounded-2xl flex items-center justify-center shadow-lg mx-auto">
-                        <span class="text-3xl font-bold text-white">🎨</span>
-                    </div>
+                    <img src="https://storage.lacavernedesenfants.com/images-banniere/logo.jpg"
+                         alt="Logo AFO - Caverne des Enfants"
+                         class="w-24 h-24 rounded-full shadow-lg object-cover border-4 border-white mx-auto">
                 </a>
                 <h1 class="text-3xl font-bold text-slate-900 mb-2" style="font-family: 'Playfair Display', serif;">Bienvenue</h1>
                 <p class="text-slate-600">Connectez-vous à votre compte</p>

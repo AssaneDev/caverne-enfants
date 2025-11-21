@@ -124,6 +124,105 @@
             </div>
         @endif
 
+        {{-- Section Certification d'authenticité (uniquement pour Les Carrés du Fleuve) --}}
+        @if($collection->slug === 'carres-du-fleuve')
+            <section class="relative bg-gradient-to-br from-stone-800 via-stone-700 to-amber-800 py-16 mt-16 overflow-hidden rounded-xl">
+                {{-- Motif de fond --}}
+                <div class="absolute inset-0 opacity-5">
+                    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.2) 2px, transparent 2px); background-size: 60px 60px;"></div>
+                </div>
+
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-2xl overflow-hidden">
+                        <div class="grid md:grid-cols-2 gap-0">
+                            {{-- Image --}}
+                            <div class="bg-stone-100 flex items-center justify-center p-8">
+                                <img src="https://storage.lacavernedesenfants.com/images-banniere/certif-carre-du-fleuve.jpg"
+                                     alt="Certification d'authenticité"
+                                     class="w-full h-auto rounded-lg shadow-md">
+                            </div>
+
+                            {{-- Texte --}}
+                            <div class="p-8 md:p-12 flex flex-col justify-center">
+                                <h3 class="text-2xl md:text-3xl font-bold text-stone-900 mb-6">
+                                    Certification d'authenticité
+                                </h3>
+                                <p class="text-lg text-stone-700 leading-relaxed">
+                                    Au dos de chaque tableau se trouve cette étiquette de description, un numéro d'œuvre unique noté à la main et le tampon de l'association AFO.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
+
+        {{-- Section Certification d'authenticité (uniquement pour Les Carrés de la Petite Côte) --}}
+        @if($collection->slug === 'les-carres-de-la-petite-cote')
+            <section class="relative bg-gradient-to-br from-stone-800 via-stone-700 to-amber-800 py-16 mt-16 overflow-hidden rounded-xl">
+                {{-- Motif de fond --}}
+                <div class="absolute inset-0 opacity-5">
+                    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.2) 2px, transparent 2px); background-size: 60px 60px;"></div>
+                </div>
+
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-2xl overflow-hidden">
+                        <div class="grid md:grid-cols-2 gap-0">
+                            {{-- Image --}}
+                            <div class="bg-stone-100 flex items-center justify-center p-8">
+                                <img src="https://storage.lacavernedesenfants.com/images-banniere/certif-les-carre-de-amitie.png"
+                                     alt="Certification d'authenticité"
+                                     class="w-full h-auto rounded-lg shadow-md">
+                            </div>
+
+                            {{-- Texte --}}
+                            <div class="p-8 md:p-12 flex flex-col justify-center">
+                                <h3 class="text-2xl md:text-3xl font-bold text-stone-900 mb-6">
+                                    Certification d'authenticité
+                                </h3>
+                                <p class="text-lg text-stone-700 leading-relaxed">
+                                    Au dos de chaque tableau se trouve cette étiquette de description, un numéro d'œuvre unique noté à la main et le tampon de l'association AFO.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
+
+        {{-- Section Certification d'authenticité (uniquement pour Les Baobabs de la Petite Côte) --}}
+        @if($collection->slug === 'les-baobabs-de-la-petite-cote')
+            <section class="relative bg-gradient-to-br from-stone-800 via-stone-700 to-amber-800 py-16 mt-16 overflow-hidden rounded-xl">
+                {{-- Motif de fond --}}
+                <div class="absolute inset-0 opacity-5">
+                    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.2) 2px, transparent 2px); background-size: 60px 60px;"></div>
+                </div>
+
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-2xl overflow-hidden">
+                        <div class="grid md:grid-cols-2 gap-0">
+                            {{-- Image --}}
+                            <div class="bg-stone-100 flex items-center justify-center p-8">
+                                <img src="https://storage.lacavernedesenfants.com/images-banniere/certif-baobab.png"
+                                     alt="Certification d'authenticité"
+                                     class="w-full h-auto rounded-lg shadow-md">
+                            </div>
+
+                            {{-- Texte --}}
+                            <div class="p-8 md:p-12 flex flex-col justify-center">
+                                <h3 class="text-2xl md:text-3xl font-bold text-stone-900 mb-6">
+                                    Certification d'authenticité
+                                </h3>
+                                <p class="text-lg text-stone-700 leading-relaxed">
+                                    Au dos de chaque tableau se trouve cette étiquette de description, un numéro d'œuvre unique noté à la main et le tampon de l'association AFO.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
+
         <!-- Section Images d'Ambiance de Création -->
         @if($collection->getMedia('atmosphere_images')->count() > 0 || $collection->atmosphere_description)
             <div class="mt-20 mb-12">
@@ -481,8 +580,8 @@
         </script>
     @endif
 
-    {{-- Section Vidéo (uniquement pour Les Carrés du Fleuve) --}}
-    @if($collection->slug === 'les-carres-du-fleuve')
+    {{-- Section Vidéo YouTube (uniquement pour Les Carrés du Fleuve) --}}
+    @if($collection->slug === 'carres-du-fleuve')
         <section class="relative bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900 py-20 overflow-hidden mt-16">
             {{-- Motif de fond --}}
             <div class="absolute inset-0 opacity-5">
@@ -499,28 +598,28 @@
                         </svg>
                     </div>
                     <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
-                        L'Art en Mouvement
+                        L'art des enfants en mouvement
                     </h2>
                     <p class="text-xl text-amber-100 max-w-3xl mx-auto leading-relaxed">
                         Découvrez les coulisses de la création des Carrés du Fleuve
                     </p>
                 </div>
 
-                {{-- Conteneur vidéo --}}
+                {{-- Conteneur vidéo YouTube --}}
                 <div class="relative max-w-5xl mx-auto">
                     {{-- Effet de halo --}}
                     <div class="absolute -inset-4 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 rounded-3xl blur-2xl opacity-20"></div>
 
-                    {{-- Vidéo --}}
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/10">
-                        <video
-                            class="w-full h-auto"
-                            controls
-                            preload="metadata"
-                            poster="{{ Storage::disk('r2')->url('images-banniere/video-poster.jpg') }}">
-                            <source src="{{ Storage::disk('r2')->url('images-banniere/video.mp4') }}" type="video/mp4">
-                            Votre navigateur ne supporte pas la lecture de vidéos.
-                        </video>
+                    {{-- Vidéo YouTube --}}
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/10" style="aspect-ratio: 16/9;">
+                        <iframe
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/Goca5O8jqdY"
+                            title="Les Carrés du Fleuve - Vidéo"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
                     </div>
 
                     {{-- Décoration --}}
@@ -549,7 +648,7 @@
                         </svg>
                     </div>
                     <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
-                        L'Art en Mouvement
+                        L'art des enfants en mouvement
                     </h2>
                     <p class="text-xl text-amber-100 max-w-3xl mx-auto leading-relaxed">
                         Découvrez les coulisses de la création des Carrés de la Petite Côte
@@ -567,6 +666,56 @@
                             class="w-full h-full"
                             src="https://www.youtube.com/embed/gaYHLt9QxOA"
                             title="Les Carrés de la Petite Côte - Vidéo"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    {{-- Décoration --}}
+                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-amber-600 rounded-full opacity-10 blur-3xl"></div>
+                    <div class="absolute -top-6 -left-6 w-48 h-48 bg-orange-600 rounded-full opacity-10 blur-3xl"></div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+    {{-- Section Vidéo YouTube (uniquement pour Poupées Guerrières de Lumière) --}}
+    @if($collection->slug === 'poupees-guerrieres-de-lumiere')
+        <section class="relative bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900 py-20 overflow-hidden mt-16">
+            {{-- Motif de fond --}}
+            <div class="absolute inset-0 opacity-5">
+                <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255,255,255,0.2) 2px, transparent 2px); background-size: 60px 60px;"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {{-- En-tête de section --}}
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-full mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
+                        L'art des enfants en mouvement
+                    </h2>
+                    <p class="text-xl text-amber-100 max-w-3xl mx-auto leading-relaxed">
+                        Découvrez les coulisses de la création des Poupées Guerrières de Lumière
+                    </p>
+                </div>
+
+                {{-- Conteneur vidéo YouTube --}}
+                <div class="relative max-w-5xl mx-auto">
+                    {{-- Effet de halo --}}
+                    <div class="absolute -inset-4 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 rounded-3xl blur-2xl opacity-20"></div>
+
+                    {{-- Vidéo YouTube --}}
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/10" style="aspect-ratio: 16/9;">
+                        <iframe
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/7_GQ5m_rqMk"
+                            title="Poupées Guerrières de Lumière - Vidéo"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen>

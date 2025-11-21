@@ -43,19 +43,72 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0">
-                    <a href="{{ route('home') }}" class="text-2xl font-serif font-bold text-amber-600 hover:text-amber-700 transition">
+                    <a href="{{ route('home') }}" class="text-xl sm:text-2xl font-serif font-bold text-amber-600 hover:text-amber-700 transition">
                         La Caverne des Enfants
                     </a>
                 </div>
+
+                {{-- Desktop Menu --}}
                 <div class="hidden md:flex space-x-8">
                     <a href="{{ route('home') }}" class="text-stone-700 hover:text-amber-600 transition font-medium">Accueil</a>
                     <a href="{{ route('about') }}" class="text-amber-600 font-medium">À propos</a>
                     <a href="{{ route('collections.index') }}" class="text-stone-700 hover:text-amber-600 transition font-medium">Collections</a>
                     <a href="{{ route('cart.show') }}" class="text-stone-700 hover:text-amber-600 transition font-medium">Panier</a>
                 </div>
+
+                {{-- Mobile Menu Button & Cart --}}
+                <div class="md:hidden flex items-center space-x-4">
+                    {{-- Cart Icon for Mobile --}}
+                    <a href="{{ route('cart.show') }}" class="text-stone-600 hover:text-stone-900 relative transition-colors">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        @livewire('cart-counter')
+                    </a>
+
+                    {{-- Hamburger Menu Button --}}
+                    <button id="mobile-menu-button-about" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none focus:text-stone-900">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menu-icon-about" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path id="close-icon-about" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            {{-- Mobile Menu --}}
+            <div id="mobile-menu-about" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-3 pt-2">
+                    <a href="{{ route('home') }}" class="text-stone-600 hover:text-stone-900 hover:bg-stone-50 px-3 py-2 rounded-md transition-colors">
+                        Accueil
+                    </a>
+                    <a href="{{ route('about') }}" class="text-amber-600 hover:bg-stone-50 px-3 py-2 rounded-md transition-colors font-medium">
+                        À propos
+                    </a>
+                    <a href="{{ route('collections.index') }}" class="text-stone-600 hover:text-stone-900 hover:bg-stone-50 px-3 py-2 rounded-md transition-colors">
+                        Collections
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.getElementById('mobile-menu-button-about');
+            const mobileMenu = document.getElementById('mobile-menu-about');
+            const menuIcon = document.getElementById('menu-icon-about');
+            const closeIcon = document.getElementById('close-icon-about');
+
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    menuIcon.classList.toggle('hidden');
+                    closeIcon.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
 
     <!-- Hero Section -->
     <section class="relative bg-gradient-to-br from-amber-50 via-orange-50 to-stone-100 py-20 lg:py-32 overflow-hidden">

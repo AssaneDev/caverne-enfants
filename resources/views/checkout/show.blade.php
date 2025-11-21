@@ -1,6 +1,6 @@
 <x-layouts.app metaTitle="Paiement - Caverne des Enfants">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="text-3xl font-bold text-stone-900 mb-8">Finaliser la commande</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-stone-900 mb-8">Finaliser la commande</h1>
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Formulaire de paiement -->
@@ -160,23 +160,23 @@
                 
                 <div class="space-y-4">
                     @foreach($cart->items as $item)
-                        <div class="flex items-center space-x-4">
-                            <div class="w-16 h-16 bg-stone-100 rounded-lg overflow-hidden">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+                            <div class="w-full sm:w-16 h-40 sm:h-16 bg-stone-100 rounded-lg overflow-hidden flex-shrink-0">
                                 @if($item->artwork->image_path)
-                                    <img src="{{ asset('storage/' . $item->artwork->image_path) }}" 
+                                    <img src="{{ asset('storage/' . $item->artwork->image_path) }}"
                                          alt="{{ $item->artwork->title }}"
                                          class="w-full h-full object-cover">
                                 @endif
                             </div>
-                            
-                            <div class="flex-1">
-                                <h3 class="font-semibold text-stone-900">
+
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-semibold text-stone-900 truncate">
                                     {{ $item->artwork->title }}
                                 </h3>
                                 <p class="text-sm text-stone-600">par {{ $item->artwork->artist->name }}</p>
                             </div>
-                            
-                            <span class="font-semibold text-stone-900">
+
+                            <span class="font-semibold text-stone-900 self-start sm:self-auto">
                                 {{ number_format($item->artwork->price, 0, ',', ' ') }} €
                             </span>
                         </div>

@@ -100,7 +100,7 @@
                     Caverne des Enfants
                 </h1>
                 <p class="text-xl text-stone-600 max-w-3xl mx-auto mb-8">
-                    Découvrez des œuvres d'art uniques créées par des artistes passionnés
+                    Découvrez des œuvres uniques créées par des artistes en herbe passionnés
                 </p>
                 <a href="{{ route('collections.index') }}" 
                    class="inline-block bg-amber-600 text-white px-8 py-4 rounded-lg hover:bg-amber-700 transition-colors text-lg font-semibold">
@@ -211,6 +211,24 @@
                 <img src="{{ Storage::disk('r2')->url('images-banniere/afo.png') }}"
                      alt="Bannière Caverne des Enfants"
                      class="w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
+
+    {{-- Section Projet Solidaire avec Logo AFO --}}
+    <section class="py-12 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+                <div class="flex-shrink-0">
+                    <img src="https://storage.lacavernedesenfants.com/images-banniere/logo.jpg"
+                         alt="Logo AFO"
+                         class="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-lg object-cover">
+                </div>
+                <div class="text-center md:text-left">
+                    <p class="text-xl md:text-2xl text-stone-700 leading-relaxed font-medium">
+                        La Caverne des Enfants est un projet 100% solidaire porté par l'association AFO et son équipe de volontaires.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -530,7 +548,7 @@
                     </svg>
                 </div>
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
-                    L'Art en Mouvement
+                    L'art des enfants en mouvement
                 </h2>
                 <p class="text-xl text-amber-100 max-w-3xl mx-auto leading-relaxed">
                     Plongez dans l'univers créatif de La Caverne des Enfants

@@ -25,11 +25,11 @@
                         Œuvre unique
                     </span>
                     
-                    <h1 class="text-3xl font-bold text-stone-900 mb-4">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-stone-900 mb-4">
                         {{ $artwork->title }}
                     </h1>
-                    
-                    <div class="flex items-center space-x-4 text-stone-600 mb-6">
+
+                    <div class="flex flex-wrap items-center gap-2 sm:gap-4 text-sm sm:text-base text-stone-600 mb-6">
                         @if($artwork->artist)
                             <span>par <strong>{{ $artwork->artist->name }}</strong></span>
                         @endif
@@ -58,33 +58,33 @@
                 <div class="border-t border-stone-200 pt-6">
                     <dl class="space-y-3">
                         @if($artwork->medium)
-                            <div class="flex">
-                                <dt class="w-24 text-stone-500">Technique</dt>
+                            <div class="flex flex-col sm:flex-row">
+                                <dt class="sm:w-32 text-stone-500 font-medium mb-1 sm:mb-0">Technique</dt>
                                 <dd class="text-stone-900">{{ $artwork->medium }}</dd>
                             </div>
                         @endif
-                        
+
                         @if($artwork->dimensions)
-                            <div class="flex">
-                                <dt class="w-24 text-stone-500">Format</dt>
+                            <div class="flex flex-col sm:flex-row">
+                                <dt class="sm:w-32 text-stone-500 font-medium mb-1 sm:mb-0">Format</dt>
                                 <dd class="text-stone-900">{{ $artwork->dimensions }}</dd>
                             </div>
                         @endif
-                        
-                        <div class="flex">
-                            <dt class="w-24 text-stone-500">Référence</dt>
+
+                        <div class="flex flex-col sm:flex-row">
+                            <dt class="sm:w-32 text-stone-500 font-medium mb-1 sm:mb-0">Référence</dt>
                             <dd class="text-stone-900 font-mono text-sm">{{ $artwork->sku }}</dd>
                         </div>
                     </dl>
                 </div>
                 
                 <div class="border-t border-stone-200 pt-6">
-                    <div class="flex items-center justify-between mb-6">
-                        <span class="text-3xl font-bold text-amber-600">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-6">
+                        <span class="text-2xl sm:text-3xl font-bold text-amber-600">
                             {{ number_format($artwork->price, 0, ',', ' ') }} €
                         </span>
-                        
-                        <span class="text-sm text-stone-500">
+
+                        <span class="text-xs sm:text-sm text-stone-500">
                             Livraison incluse
                         </span>
                     </div>

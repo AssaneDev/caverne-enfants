@@ -8,6 +8,10 @@
     <title>{{ $metaTitle ?? 'Caverne des Enfants' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'Boutique d\'art unique - Œuvres originales et collections d\'artistes' }}">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://storage.lacavernedesenfants.com/images-banniere/logo.jpg">
+    <link rel="apple-touch-icon" href="https://storage.lacavernedesenfants.com/images-banniere/logo.jpg">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,36 +27,86 @@
     <nav class="bg-white shadow-sm border-b border-stone-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
-                <div class="flex items-center">
+                <div class="flex items-center gap-3">
+                    <img src="https://storage.lacavernedesenfants.com/images-banniere/logo.jpg"
+                         alt="Logo AFO"
+                         class="w-10 h-10 rounded-full object-cover">
                     <a href="{{ route('home') }}" class="text-xl font-bold text-amber-600">
                         Caverne des Enfants
                     </a>
                 </div>
-                
-                <div class="flex items-center space-x-8">
-                    <a href="{{ route('home') }}" class="text-stone-600 hover:text-stone-900">
+
+                {{-- Desktop Menu --}}
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{{ route('home') }}" class="text-stone-600 hover:text-stone-900 transition-colors">
                         Accueil
                     </a>
 
-                    <a href="{{ route('about') }}" class="text-stone-600 hover:text-stone-900">
+                    <a href="{{ route('about') }}" class="text-stone-600 hover:text-stone-900 transition-colors">
                         À propos
                     </a>
 
-                    <a href="{{ route('collections.index') }}" class="text-stone-600 hover:text-stone-900">
+                    <a href="{{ route('collections.index') }}" class="text-stone-600 hover:text-stone-900 transition-colors">
                         Collections
                     </a>
 
-                    <a href="{{ route('cart.show') }}" class="text-stone-600 hover:text-stone-900 relative">
+                    <a href="{{ route('cart.show') }}" class="text-stone-600 hover:text-stone-900 relative transition-colors">
                         Panier
                         @livewire('cart-counter')
                     </a>
-                    
+
                     @auth
-                        <a href="{{ route('account.index') }}" class="text-stone-600 hover:text-stone-900">
+                        <a href="{{ route('account.index') }}" class="text-stone-600 hover:text-stone-900 transition-colors">
                             Mon compte
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="text-stone-600 hover:text-stone-900">
+                        <a href="{{ route('login') }}" class="text-stone-600 hover:text-stone-900 transition-colors">
+                            Connexion
+                        </a>
+                    @endauth
+                </div>
+
+                {{-- Mobile Menu Button & Cart --}}
+                <div class="md:hidden flex items-center space-x-4">
+                    {{-- Cart Icon for Mobile --}}
+                    <a href="{{ route('cart.show') }}" class="text-stone-600 hover:text-stone-900 relative transition-colors">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        @livewire('cart-counter')
+                    </a>
+
+                    {{-- Hamburger Menu Button --}}
+                    <button id="mobile-menu-button" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none focus:text-stone-900">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            {{-- Mobile Menu --}}
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-3 pt-2">
+                    <a href="{{ route('home') }}" class="text-stone-600 hover:text-stone-900 hover:bg-stone-50 px-3 py-2 rounded-md transition-colors">
+                        Accueil
+                    </a>
+
+                    <a href="{{ route('about') }}" class="text-stone-600 hover:text-stone-900 hover:bg-stone-50 px-3 py-2 rounded-md transition-colors">
+                        À propos
+                    </a>
+
+                    <a href="{{ route('collections.index') }}" class="text-stone-600 hover:text-stone-900 hover:bg-stone-50 px-3 py-2 rounded-md transition-colors">
+                        Collections
+                    </a>
+
+                    @auth
+                        <a href="{{ route('account.index') }}" class="text-stone-600 hover:text-stone-900 hover:bg-stone-50 px-3 py-2 rounded-md transition-colors">
+                            Mon compte
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-stone-600 hover:text-stone-900 hover:bg-stone-50 px-3 py-2 rounded-md transition-colors">
                             Connexion
                         </a>
                     @endauth
@@ -60,6 +114,21 @@
             </div>
         </div>
     </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            menuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                menuIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+        });
+    </script>
 
     <main>
         {{ $slot }}
@@ -70,7 +139,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
-                    Restez Connecté à l'Art 🎨
+                    Restez connecté à l'art des enfants 🎨
                 </h2>
                 <p class="text-white/90 text-lg mb-8">
                     Inscrivez-vous à notre newsletter et découvrez en avant-première nos nouvelles créations, collections exclusives et offres spéciales
@@ -134,9 +203,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <div>
-                    <h3 class="text-xl font-bold text-amber-500 mb-4" style="font-family: 'Playfair Display', serif;">
-                        Caverne des Enfants
-                    </h3>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://storage.lacavernedesenfants.com/images-banniere/logo.jpg"
+                             alt="Logo AFO"
+                             class="w-12 h-12 rounded-full object-cover">
+                        <h3 class="text-xl font-bold text-amber-500" style="font-family: 'Playfair Display', serif;">
+                            Caverne des Enfants
+                        </h3>
+                    </div>
                     <p class="text-stone-400 leading-relaxed">
                         Association artistique dédiée à la promotion d'œuvres d'art uniques pour éveiller l'imagination des enfants.
                     </p>
